@@ -74,7 +74,7 @@ Embed the robot screenshot to the receipt PDF file
     #${files}=    Create List    ${OUTPUT DIR}${/}receipts${/}${order_number}.PNG:align=center,format=A4
     #Add Files To PDF    ${files}    ${OUTPUT DIR}${/}receipts${/}${order_number}.pdf
     Add Watermark Image To PDF
-    ...             image_path=${OUTPUT DIR}${/}receipts${/}${order_number}.PNG
+    ...             image_path=${OUTPUT DIR}${/}receipts${/}${order_number}.png
     ...             source_path=${OUTPUT DIR}${/}receipts${/}${order_number}.pdf
     ...             output_path=${OUTPUT DIR}${/}receipts${/}${order_number}.pdf
     Close Pdf     ${OUTPUT DIR}${/}receipts${/}${order_number}.pdf
