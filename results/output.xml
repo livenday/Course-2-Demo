@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on darwin)" generated="20230417 13:01:19.776" rpa="true" schemaversion="3">
+<suite id="s1" name="Course 2 Demo" source="/Users/jramirezv/ws-robocorp/Course 2 Demo">
+<suite id="s1-s1" name="Tasks" source="/Users/jramirezv/ws-robocorp/Course 2 Demo/tasks.robot">
+<test id="s1-s1-t1" name="Orders robots from RobotSpareBin Industries Inc" line="14">
+<kw name="Open the robot order website">
+<kw name="Open Available Browser" library="RPA.Browser.Selenium">
+<arg>https://robotsparebinindustries.com/#/robot-order</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<msg timestamp="20230417 13:01:21.786" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20230417 13:01:21.825" level="INFO">====== WebDriver manager ======</msg>
+<msg timestamp="20230417 13:01:24.778" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20230417 13:01:40.074" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg timestamp="20230417 13:01:40.083" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;Message: 'chromedriver' executable needs to be in PATH. Please see https://chromedriver.chromium.org/home
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg timestamp="20230417 13:01:40.084" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
+<status status="PASS" starttime="20230417 13:01:21.784" endtime="20230417 13:01:46.642"/>
+</kw>
+<status status="PASS" starttime="20230417 13:01:21.780" endtime="20230417 13:01:46.648"/>
+</kw>
+<kw name="Get orders">
+<var>${orders}</var>
+<kw name="Download file orders">
+<kw name="Download" library="RPA.HTTP">
+<arg>https://robotsparebinindustries.com/orders.csv</arg>
+<arg>overwrite=${True}</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20230417 13:01:46.658" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20230417 13:01:46.659" level="INFO">Creating Session using : alias=rpasession_alias.httpsrobotsparebinindustries.com, url=https://robotsparebinindustries.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230417 13:01:46.655" endtime="20230417 13:01:46.914"/>
+</kw>
+<status status="PASS" starttime="20230417 13:01:46.654" endtime="20230417 13:01:46.914"/>
+</kw>
+<kw name="Read table from CSV" library="RPA.Tables">
+<var>${orders}</var>
+<arg>/Users/jramirezv/ws-robocorp/Course 2 Demo${/}orders.csv</arg>
+<arg>header=${True}</arg>
+<doc>Read a CSV file as a table.</doc>
+<msg timestamp="20230417 13:01:46.918" level="INFO">${orders} = Table(columns=['Order number', 'Head', 'Body', 'Legs', 'Address'], rows=20)</msg>
+<status status="PASS" starttime="20230417 13:01:46.914" endtime="20230417 13:01:46.919"/>
+</kw>
+<return>
+<value>${orders}</value>
+<status status="PASS" starttime="20230417 13:01:46.919" endtime="20230417 13:01:46.919"/>
+</return>
+<msg timestamp="20230417 13:01:46.920" level="INFO">${orders} = Table(columns=['Order number', 'Head', 'Body', 'Legs', 'Address'], rows=20)</msg>
+<status status="PASS" starttime="20230417 13:01:46.651" endtime="20230417 13:01:46.920"/>
+</kw>
+<for flavor="IN">
+<var>${order}</var>
+<value>@{orders}</value>
+<iter>
+<var name="${order}">{'Order number': '1', 'Head': '1', 'Body': '2', 'Legs': '3', 'Address': 'Address 123'}</var>
+<kw name="Close the annoying modal">
+<kw name="Click Button" library="RPA.Browser.Selenium">
+<arg>xpath://*[@id="root"]/div/div[2]/div/div/div/div/div/button[1]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230417 13:01:46.925" level="INFO">Clicking button 'xpath://*[@id="root"]/div/div[2]/div/div/div/div/div/button[1]'.</msg>
+<msg timestamp="20230417 13:01:46.933" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+0   chromedriver                        0x0000000102a54ae8 chromedriver + 4958952
+1   chromedriver                        0x0000000102a4c7b3 chromedriver + 4925363
+2   chromedriver                        0x000000010260e1d6 chromedriver + 475606
+3   chromedriver                        0x00000001025e3cec chromedriver + 302316
+4   chromedriver                        0x000000010267cf2f chromedriver + 929583
+5   chromedriver                        0x0000000102692926 chromedriver + 1018150
+6   chromedriver                        0x00000001026779e3 chromedriver + 907747
+7   chromedriver                        0x0000000102641aef chromedriver + 686831
+8   chromedriver                        0x000000010264300e chromedriver + 692238
+9   chromedriver                        0x0000000102a109ad chromedriver + 4680109
+10  chromedriver                        0x0000000102a15c12 chromedriver + 4701202
+11  chromedriver                        0x0000000102a1c79f chromedriver + 4728735
+12  chromedriver                        0x0000000102a16b7a chromedriver + 4705146
+13  chromedriver                        0x00000001029e927e chromedriver + 4518526
+14  chromedriver                        0x0000000102a36908 chromedriver + 4835592
+15  chromedriver                        0x0000000102a36a87 chromedriver + 4835975
+16  chromedriver                        0x0000000102a4600f chromedriver + 4898831
+17  libsystem_pthread.dylib             0x00007ff809dd1259 _pthread_start + 125
+18  libsystem_pthread.dylib             0x00007ff809dccc7b thread_start + 15
+</msg>
+<msg timestamp="20230417 13:01:46.937" level="FAIL">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+0   chromedriver                        0x0000000102a54ae8 chromedriver + 4958952
+1   chromedriver                        0x0000000102a4c7b3 chromedriver + 4925363
+2   chromedriver                        0x000000010260e1d6 chromedriver + 475606
+3   chromedriver                        0x00000001025e3cec chromedriver + 302316
+4   chromedriver                        0x000000010267cf2f chromedriver + 929583
+5   chromedriver                        0x0000000102692926 chromedriver + 1018150
+6   chromedriver                        0x00000001026779e3 chromedriver + 907747
+7   chromedriver                        0x0000000102641aef chromedriver + 686831
+8   chromedriver                        0x000000010264300e chromedriver + 692238
+9   chromedriver                        0x0000000102a109ad chromedriver + 4680109
+10  chromedriver                        0x0000000102a15c12 chromedriver + 4701202
+11  chromedriver                        0x0000000102a1c79f chromedriver + 4728735
+12  chromedriver                        0x0000000102a16b7a chromedriver + 4705146
+13  chromedriver                        0x00000001029e927e chromedriver + 4518526
+14  chromedriver                        0x0000000102a36908 chromedriver + 4835592
+15  chromedriver                        0x0000000102a36a87 chromedriver + 4835975
+16  chromedriver                        0x0000000102a4600f chromedriver + 4898831
+17  libsystem_pthread.dylib             0x00007ff809dd1259 _pthread_start + 125
+18  libsystem_pthread.dylib             0x00007ff809dccc7b thread_start + 15
+</msg>
+<status status="FAIL" starttime="20230417 13:01:46.923" endtime="20230417 13:01:46.940"/>
+</kw>
+<status status="FAIL" starttime="20230417 13:01:46.923" endtime="20230417 13:01:46.941"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<arg>3x</arg>
+<arg>5s</arg>
+<arg>Fill the form</arg>
+<arg>${order}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="NOT RUN" starttime="20230417 13:01:46.942" endtime="20230417 13:01:46.943"/>
+</kw>
+<kw name="Download and store the receipts orders">
+<arg>${order}</arg>
+<status status="NOT RUN" starttime="20230417 13:01:46.943" endtime="20230417 13:01:46.943"/>
+</kw>
+<kw name="Order another robot">
+<status status="NOT RUN" starttime="20230417 13:01:46.943" endtime="20230417 13:01:46.944"/>
+</kw>
+<status status="FAIL" starttime="20230417 13:01:46.922" endtime="20230417 13:01:46.944"/>
+</iter>
+<status status="FAIL" starttime="20230417 13:01:46.921" endtime="20230417 13:01:46.944"/>
+</for>
+<status status="FAIL" starttime="20230417 13:01:21.776" endtime="20230417 13:01:46.945">NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+0   chromedriver                        0x0000000102a54ae8 chromedriver + 4958952
+1   chromedriver                        0x0000000102a4c7b3 chromedriver + 4925363
+2   chromedriver                        0x000000010260e1d6 chromedriver + 475606
+3   chromedriver                        0x00000001025e3cec chromedriver + 302316
+4   chromedriver                        0x000000010267cf2f chromedriver + 929583
+5   chromedriver                        0x0000000102692926 chromedriver + 1018150
+6   chromedriver                        0x00000001026779e3 chromedriver + 907747
+7   chromedriver                        0x0000000102641aef chromedriver + 686831
+    [ Message content over the limit has been removed. ]
+...hromedriver                        0x000000010264300e chromedriver + 692238
+9   chromedriver                        0x0000000102a109ad chromedriver + 4680109
+10  chromedriver                        0x0000000102a15c12 chromedriver + 4701202
+11  chromedriver                        0x0000000102a1c79f chromedriver + 4728735
+12  chromedriver                        0x0000000102a16b7a chromedriver + 4705146
+13  chromedriver                        0x00000001029e927e chromedriver + 4518526
+14  chromedriver                        0x0000000102a36908 chromedriver + 4835592
+15  chromedriver                        0x0000000102a36a87 chromedriver + 4835975
+16  chromedriver                        0x0000000102a4600f chromedriver + 4898831
+17  libsystem_pthread.dylib             0x00007ff809dd1259 _pthread_start + 125
+18  libsystem_pthread.dylib             0x00007ff809dccc7b thread_start + 15</status>
+</test>
+<doc>Orders robots from RobotSpareBin Industries Inc.
+Saves the order HTML receipt as a PDF file.
+Saves the screenshot of the ordered robot.
+Embeds the screenshot of the robot to the PDF receipt.
+Creates ZIP archive of the receipts and the images.</doc>
+<status status="FAIL" starttime="20230417 13:01:19.855" endtime="20230417 13:01:46.947"/>
+</suite>
+<status status="FAIL" starttime="20230417 13:01:19.787" endtime="20230417 13:01:46.952"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Course 2 Demo">Course 2 Demo</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1" name="Tasks">Course 2 Demo.Tasks</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20230417 13:01:46.933" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=112.0.5615.49)
+Stacktrace:
+0   chromedriver                        0x0000000102a54ae8 chromedriver + 4958952
+1   chromedriver                        0x0000000102a4c7b3 chromedriver + 4925363
+2   chromedriver                        0x000000010260e1d6 chromedriver + 475606
+3   chromedriver                        0x00000001025e3cec chromedriver + 302316
+4   chromedriver                        0x000000010267cf2f chromedriver + 929583
+5   chromedriver                        0x0000000102692926 chromedriver + 1018150
+6   chromedriver                        0x00000001026779e3 chromedriver + 907747
+7   chromedriver                        0x0000000102641aef chromedriver + 686831
+8   chromedriver                        0x000000010264300e chromedriver + 692238
+9   chromedriver                        0x0000000102a109ad chromedriver + 4680109
+10  chromedriver                        0x0000000102a15c12 chromedriver + 4701202
+11  chromedriver                        0x0000000102a1c79f chromedriver + 4728735
+12  chromedriver                        0x0000000102a16b7a chromedriver + 4705146
+13  chromedriver                        0x00000001029e927e chromedriver + 4518526
+14  chromedriver                        0x0000000102a36908 chromedriver + 4835592
+15  chromedriver                        0x0000000102a36a87 chromedriver + 4835975
+16  chromedriver                        0x0000000102a4600f chromedriver + 4898831
+17  libsystem_pthread.dylib             0x00007ff809dd1259 _pthread_start + 125
+18  libsystem_pthread.dylib             0x00007ff809dccc7b thread_start + 15
+</msg>
+</errors>
+</robot>
