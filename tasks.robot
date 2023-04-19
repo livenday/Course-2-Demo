@@ -10,10 +10,22 @@ Library    RPA.HTTP
 Library    RPA.Tables
 Library    RPA.PDF
 Library    RPA.Archive
+Library    RPA.Assistant
 
 *** Tasks ***
-Orders robots from RobotSpareBin Industries Inc
-    Open the robot order website
+Orders robots attend from RobotSpareBin Industries Inc
+    [Documentation]
+    ...    En este ejemplo recibimos entradas del usuario
+    ...    Se puede recibir la url de la página para crear ordenes.
+    ...    https://robotsparebinindustries.com/#/robot-order
+    # Clear Dialog
+    Add Heading    Input from User
+    Add text input    text_input    please enter URL
+    Add submit buttons    buttons=Submit,Cancel    default=Submit
+    ${result}=    Run dialog
+    ${url}=    Set Variable    ${result}[text_input]
+    Log To Console    ${url}
+    Open the robot order website with param    ${url}
     ${orders}=    Get orders
     FOR    ${order}    IN    @{orders}
         Close the annoying modal
@@ -27,6 +39,10 @@ Orders robots from RobotSpareBin Industries Inc
 *** Keywords ***
 Open the robot order website
     Open Available Browser    https://robotsparebinindustries.com/#/robot-order
+
+Open the robot order website with param
+    [Arguments]    ${url}
+    Open Available Browser    ${url}
 
 Download file orders
     Download    https://robotsparebinindustries.com/orders.csv    overwrite=${True}
@@ -94,3 +110,16 @@ Archive output PDFs
 
 Close RobotSpareBin Browser
     Close Browser
+
+Orders robots from RobotSpareBin Industries Inc
+    Open the robot order website
+    ${orders}=    Get orders
+    FOR    ${order}    IN    @{orders}
+        Close the annoying modal
+        Wait Until Keyword Succeeds    5x    15 sec    Fill the form   ${order}
+        Download and store the receipts orders    ${order}
+        Order another robot
+    END
+    Archive output PDFs
+    [Teardown]    Close RobotSpareBin Browser
+
